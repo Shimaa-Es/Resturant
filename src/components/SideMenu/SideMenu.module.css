@@ -5,6 +5,8 @@
     .icon {
         font-size: 30px;
         font-weight: 700;
+        color: var(--mainRed);
+        margin-left: 2px;
     }
 
     #logo {
