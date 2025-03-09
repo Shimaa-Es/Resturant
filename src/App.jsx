@@ -3,16 +3,12 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import SideMenu from "./components/SideMenu/SideMenu";
 import { useEffect, useState } from "react";
 import CategoryProducts from "./pages/CategoryProducts/CategoryProducts";
+import Categories from "./pages/Categories/Categories";
+import { useCategories } from "./store";
 export default function App() {
-  const [categories] = useState([
-    { name: "Cold Drinks", path: "cold", price: 500 },
-    { name: "Burgers", path: "burgers", price: 600 },
-    { name: "Pizza", path: "pizza", price: 500 },
-    { name: "Wok", path: "wok", price: 600 },
-    { name: "Desserts", path: "dessert", price: 650 },
-    { name: "Pasta", path: "pasta", price: 500 },
-  ]);
-
+  // to Show SideMenu
+  const { data: categories } = useCategories();
+  
   let catsRoutes = categories.map((el) => { return "/orders/" + el.path });
   let acceptedRoutes = ["/orders", "/settings", "/bills", "/", ...catsRoutes];
 
@@ -27,7 +23,7 @@ export default function App() {
       {acceptedRoutes.includes(path) && <SideMenu />}
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/orders" element={<h1>Food and Drinks</h1>} />
+        <Route path="/orders/" element={<Categories />} />
         <Route path="/orders/:catName" element={<CategoryProducts />} />
         <Route path="/settings" element={<h1>settings</h1>} />
         <Route path="/bills" element={<h1>Bills</h1>} />
